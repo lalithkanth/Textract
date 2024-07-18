@@ -4,14 +4,14 @@ import time
 
 app = Flask(__name__)
 
-@app.route('/process_document', methods=['POST'])
+@app.route('/process_document', methods=['GET'])
 def process_document():
     data = request.json
-    s3_bucket_name = data.get('s3_bucket_name')
+    s3_bucket_name = 'textractpdf'  # Hardcoded S3 bucket name
     object_name = data.get('object_name')
 
-    if not s3_bucket_name or not object_name:
-        return jsonify({"error": "s3_bucket_name and object_name are required."}), 400
+    if not object_name:
+        return jsonify({"error": "object_name is required."}), 400
 
     client = boto3.client(
         'textract',
