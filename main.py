@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/process_document', methods=['GET'])
 def process_document():
-    data = request.json
     s3_bucket_name = 'textractpdf'  # Hardcoded S3 bucket name
     object_name = request.args.get('object_name')
 
