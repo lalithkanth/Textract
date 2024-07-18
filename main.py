@@ -8,7 +8,7 @@ app = Flask(__name__)
 def process_document():
     data = request.json
     s3_bucket_name = 'textractpdf'  # Hardcoded S3 bucket name
-    object_name = data.get('object_name')
+    object_name = request.args.get('object_name')
 
     if not object_name:
         return jsonify({"error": "object_name is required."}), 400
